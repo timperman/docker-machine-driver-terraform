@@ -50,6 +50,9 @@ type Driver struct {
 	// If not specified, a new key-pair will be generated.
 	SSHKey string
 
+	// Client public IP address (if specified, skip ifconfig.co lookup)
+	ClientIPAddress string
+
 	// The terraform executor.
 	terraformer *terraform.Terraformer
 }
@@ -71,6 +74,11 @@ func (driver *Driver) GetCreateFlags() []mcnflag.Flag {
 		mcnflag.StringFlag{
 			Name:  "terraform-variables-from",
 			Usage: "The name of a file containing the JSON that represents additional variables for the Terraform configuration",
+			Value: "",
+		},
+		mcnflag.StringFlag{
+			Name:  "terraform-client-ip",
+			Usage: "Client IP provided to Terraform as dm_client_ip (if not provided, will look up with ifconfig.co)",
 			Value: "",
 		},
 		mcnflag.BoolFlag{
@@ -124,6 +132,8 @@ func (driver *Driver) SetConfigFromFlags(flags drivers.DriverOptions) error {
 	driver.SSHUser = flags.String("terraform-ssh-user")
 	driver.SSHKey = flags.String("terraform-ssh-key")
 
+	driver.ClientIPAddress = flags.String("terraform-client-ip")
+
 	// Validation
 	if driver.ConfigSource == "" {
 		return errors.New("Required argument: --terraform-config")
@@ -138,10 +148,16 @@ func (driver *Driver) PreCreateCheck() error {
 		return errors.New("The source for Terraform configuration has not been specified")
 	}
 
-	log.Infof("Auto-detecting client's public (external) IP address...")
-	clientIP, err := getClientPublicIPv4Address()
-	if err != nil {
-		return err
+	var clientIP string
+	var err error
+	if driver.ClientIPAddress != "" {
+		clientIP = driver.ClientIPAddress
+	} else {
+		log.Infof("Auto-detecting client's public (external) IP address...")
+		clientIP, err = getClientPublicIPv4Address()
+		if err != nil {
+			return err
+		}
 	}
 
 	log.Infof("Will create machine '%s' using Terraform configuration from '%s'.",
