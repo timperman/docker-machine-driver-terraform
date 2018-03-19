@@ -7,8 +7,7 @@ import (
 // Apply invokes Terraform's "apply" command.
 func (terraformer *Terraformer) Apply() (success bool, err error) {
 	success, err = terraformer.RunStreamed("apply",
-		"-input=false", // non-interactive
-		"-auto-approve",
+		"-auto-approve", "-input=false", // non-interactive
 		"-no-color",
 		"-var-file=tfvars.json",
 	)
