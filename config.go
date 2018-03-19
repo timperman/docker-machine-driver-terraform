@@ -24,19 +24,34 @@ func (driver *Driver) importConfig() error {
 		return err
 	}
 
-	log.Infof("Importing Terraform configuration from '%s' to '%s'...",
+	action := "Importing"
+	if driver.CopyConfig {
+		action = "Copying"
+	}
+	log.Infof("%s Terraform configuration from '%s' to '%s'...",
+		action,
 		driver.ConfigSource,
 		localConfigDir,
 	)
-	driver.ConfigSource, err = fetch.ParseSource(driver.ConfigSource)
-	if err != nil {
-		return err
-	}
 
-	log.Debugf("Fetching Terraform configuration from '%s...'", driver.ConfigSource)
-	err = fetch.Content(driver.ConfigSource, localConfigDir)
-	if err != nil {
-		return err
+	if driver.CopyConfig {
+		log.Debugf("Copying Terraform configuration from '%s...'", driver.ConfigSource)
+		err = CopyDir(driver.ConfigSource, localConfigDir)
+		if err != nil {
+			return err
+		}
+		driver.ConfigDir = localConfigDir
+	} else {
+		driver.ConfigSource, err = fetch.ParseSource(driver.ConfigSource)
+		if err != nil {
+			return err
+		}
+
+		log.Debugf("Fetching Terraform configuration from '%s...'", driver.ConfigSource)
+		err = fetch.Content(driver.ConfigSource, localConfigDir)
+		if err != nil {
+			return err
+		}
 	}
 
 	log.Debugf("Fetching Terraform modules (if any)...")

@@ -1,4 +1,4 @@
-VERSION = 0.3
+VERSION = 0.4
 VERSION_INFO_FILE = version-info.go
 
 REPO_BASE = github.com/tintoy/docker-machine-driver-terraform

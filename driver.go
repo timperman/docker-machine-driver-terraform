@@ -53,6 +53,9 @@ type Driver struct {
 	// Client public IP address (if specified, skip ifconfig.co lookup)
 	ClientIPAddress string
 
+	// Copy Terraform configuration to new directory
+	CopyConfig bool
+
 	// The terraform executor.
 	terraformer *terraform.Terraformer
 }
@@ -84,6 +87,10 @@ func (driver *Driver) GetCreateFlags() []mcnflag.Flag {
 		mcnflag.BoolFlag{
 			Name:  "terraform-refresh",
 			Usage: "Refresh the configuration after applying it",
+		},
+		mcnflag.BoolFlag{
+			Name:  "terraform-copy-config",
+			Usage: "Copy terraform-config when creating each new machine",
 		},
 		mcnflag.StringFlag{
 			EnvVar: "TERRAFORM_SSH_USER",
@@ -133,6 +140,8 @@ func (driver *Driver) SetConfigFromFlags(flags drivers.DriverOptions) error {
 	driver.SSHKey = flags.String("terraform-ssh-key")
 
 	driver.ClientIPAddress = flags.String("terraform-client-ip")
+
+	driver.CopyConfig = flags.Bool("terraform-copy-config")
 
 	// Validation
 	if driver.ConfigSource == "" {
