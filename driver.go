@@ -17,7 +17,7 @@ import (
 	"github.com/docker/machine/libmachine/log"
 	"github.com/docker/machine/libmachine/mcnflag"
 	"github.com/docker/machine/libmachine/state"
-	"github.com/tintoy/docker-machine-driver-terraform/terraform"
+	"github.com/timperman/docker-machine-driver-terraform/terraform"
 )
 
 // Driver is the Docker Machine driver for Terraform.

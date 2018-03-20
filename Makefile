@@ -1,7 +1,7 @@
 VERSION = 0.4
 VERSION_INFO_FILE = version-info.go
 
-REPO_BASE = github.com/tintoy/docker-machine-driver-terraform
+REPO_BASE = github.com/timperman/docker-machine-driver-terraform
 
 default: fmt build test
 

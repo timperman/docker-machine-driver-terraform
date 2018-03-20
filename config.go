@@ -9,7 +9,7 @@ import (
 	"errors"
 
 	"github.com/docker/machine/libmachine/log"
-	"github.com/tintoy/docker-machine-driver-terraform/fetch"
+	"github.com/timperman/docker-machine-driver-terraform/fetch"
 )
 
 func (driver *Driver) importConfig() error {

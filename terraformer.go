@@ -6,7 +6,7 @@ package main
  */
 
 import (
-	"github.com/tintoy/docker-machine-driver-terraform/terraform"
+	"github.com/timperman/docker-machine-driver-terraform/terraform"
 )
 
 // Ensure that the Terraform executor has been successfully configured.

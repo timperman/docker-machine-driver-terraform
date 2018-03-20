@@ -8,7 +8,7 @@ You can contribute in many ways:
 
 ### Report Bugs
 
-Report bugs at https://github.com/tintoy/docker-machine-driver-terraform/issues.
+Report bugs at https://github.com/timperman/docker-machine-driver-terraform/issues.
 
 If you are reporting a bug, please include:
 
@@ -33,7 +33,7 @@ official documentation, in GoDoc, or even on the web in blog posts, articles, an
 
 ### Submit Feedback
 
-The best way to send feedback is to file an issue at https://github.com/tintoy/docker-machine-driver-terraform/issues.
+The best way to send feedback is to file an issue at https://github.com/timperman/docker-machine-driver-terraform/issues.
 
 If you are proposing a feature:
 
@@ -52,8 +52,8 @@ Ready to contribute? Here's how to set up `docker-machine-driver-terraform` for 
   * Otherwise:
     1. Install Go version 1.6.x
     2. Make sure your GOPATH environment variable has been set.
-    3. Run `go get -u github.com/tintoy/docker-machine-driver-terraform`.
-    4. Go to $GOPATH/src/github.com/tintoy/docker-machine-driver-terraform.
+    3. Run `go get -u github.com/timperman/docker-machine-driver-terraform`.
+    4. Go to $GOPATH/src/github.com/timperman/docker-machine-driver-terraform.
 2. Run `make dev` to build the provider
 3. Run `source ./use-dev-driver.sh` to make it available to execute.
 
@@ -75,7 +75,7 @@ There are a couple of make targets that you'll find useful:
 
 Before you submit a pull request, check that it meets these guidelines:
 
-1. Your pull request should target the [development/v1.0](https://github.com/tintoy/docker-machine-driver-terraform/tree/development/v1.0) branch.
+1. Your pull request should target the [development/v1.0](https://github.com/timperman/docker-machine-driver-terraform/tree/development/v1.0) branch.
 2. The pull request should include tests (either unit or acceptance, as appropriate).
 3. If the pull request adds or changes functionality, the docs should be updated.
 

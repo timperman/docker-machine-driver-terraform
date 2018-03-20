@@ -36,7 +36,7 @@ cat <<EOF >>~/.bashrc
 ## Make sure we have the source for Docker Machine itself
 go get -u github.com/docker/machine
 ## After login, change to docker-machine-driver-terraform directory
-cd /opt/gopath/src/github.com/tintoy/docker-machine-driver-terraform
+cd /opt/gopath/src/github.com/timperman/docker-machine-driver-terraform
 EOF
 sudo mv /tmp/gopath.sh /etc/profile.d/gopath.sh
 sudo chmod 0755 /etc/profile.d/gopath.sh
@@ -47,7 +47,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = "docker-machine-driver-ddcloud"
 
   config.vm.provision "shell", inline: $script, privileged: false
-  config.vm.synced_folder '.', '/opt/gopath/src/github.com/tintoy/docker-machine-driver-terraform'
+  config.vm.synced_folder '.', '/opt/gopath/src/github.com/timperman/docker-machine-driver-terraform'
 
   ["vmware_fusion", "vmware_workstation"].each do |p|
     config.vm.provider p do |v|
